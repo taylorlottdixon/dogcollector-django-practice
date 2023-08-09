@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Walk List</h1>
+
+{% for walk in walk_list %}
+  <a href="{% url 'walks_detail' walk.id %}">
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title">{{ walk.date }}</span>
+            <p>Start Time: {{ walk.time_start }}</p>
+            <p>End Time: {{ walk.time_end }}</p>
+            <p>Walk Length: {{ walk.length }} miles</p>
+            <!-- Add dogs that went on the walks here -->
+        </div>
+    </div>
+  </a>
+{% endfor %}
+
+{% endblock %}

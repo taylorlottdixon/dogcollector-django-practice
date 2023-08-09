@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Walk Details</h1>
+
+<div class="row">
+  <div class="col s6 col-offset-3">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">{{ walk.date }}</span>
+        <p>Start Time: {{ walk.time_start }}</p>
+        <p>End Time: {{ walk.time_end }}</p>
+        <p>Walk Length: {{ walk.length }} miles</p>
+      </div>
+      <div class="card-action">
+        <a href="{% url 'walks_update' walk.id %}">Edit</a>
+        <a href="{% url 'walks_delete' walk.id %}">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col s6">
+    <h3>Dogs on Walk</h3>
+    {% if walk.dogs.count %}
+      {% for dog in walk.dogs.all %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">
+              {{ dog.name }}
+            </span>
+          </div>
+          <div class="card-action">
+            <form action="{% url 'unassoc_walk' dog.id walk.id %}" method="DELETE">
+              {% csrf_token %}
+              <button type="submit" class="btn">Remove</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>No Dogs</h5>
+    {% endif %}
+  </div>
+  <!-- Available toys will come after this line -->
+  <div class="col s6">
+    <h3>Available Dogs</h3>
+    {% if dogs.count %}
+      {% for dog in dogs.all %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">
+              {{ dog.name }}
+            </span>
+          </div>
+          <div class="card-action">
+            <form action="{% url 'assoc_walk' dog.id walk.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn">Add</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>Every dog went on this walk! Woah!</h5>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
