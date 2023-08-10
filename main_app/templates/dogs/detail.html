@@ -22,6 +22,25 @@
             </div>
         </div>
     </div>
+</div>
+<div class="row">
+    <div class="col s6">
+      <table class="striped">
+        <thead>
+          <tr><th>Walk Date</th><th>Start Time</th><th>End Time</th><th>Miles</th></tr>
+        </thead>
+        <tbody>
+          {% for walk in dog.walks.all %}
+            <tr>
+              <td>{{walk.date}}</td>
+              <td>{{walk.time_start}}</td>
+              <td>{{walk.time_end}}</td>
+              <td>{{walk.length}}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
     <div class="col s6">
       <form action="{% url 'add_feeding' dog.id %}" method="POST">
           {% csrf_token %}

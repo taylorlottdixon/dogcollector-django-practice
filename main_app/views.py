@@ -95,8 +95,10 @@ def walks_detail(request, walk_id):
   walk = Walk.objects.get(id=walk_id)
   id_list = walk.dogs.all().values_list('id')
   dog_not_on_walk = Dog.objects.exclude(id__in=id_list)
+  dogs_left = Dog.objects.exclude(dog_not_on_walk)
   # instantiate FeedingForm to be rendered in detail.html
   return render(request, 'main_app/walk_detail.html', {
     'walk': walk, 
-    'dogs': dog_not_on_walk,
+    'dogs_walking': dog_not_on_walk,
+    'dogs_left': dogs_left,
   })
