@@ -17,4 +17,6 @@ urlpatterns = [
     path('walks/create/', views.WalkCreate.as_view(), name='walks_create'),
     path('walks/<int:pk>/update/', views.WalkUpdate.as_view(), name='walks_update'),
     path('walks/<int:pk>/delete/', views.WalkDelete.as_view(), name='walks_delete'),
+    path('dogs/<int:dog_id>/add_photo/', views.add_photo, name='add_photo'),
+    path('accounts/signup/', views.signup, name='signup'),
 ]

@@ -21,9 +21,18 @@
                 <a href="{% url 'dogs_delete' dog.id %}">Delete</a>
             </div>
         </div>
+        {% for photo in dog.photo_set.all %}
+          <img class="responsive-img card-panel" src="{{photo.url}}">
+        {% empty %}
+          <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+        {% endfor %}
+        <form action="{% url 'add_photo' dog.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
+          {% csrf_token %}
+            <input type="file" name="photo-file">
+            <br><br>
+            <button type="submit" class="btn">Upload Photo</button>
+        </form>
     </div>
-</div>
-<div class="row">
     <div class="col s6">
       <table class="striped">
         <thead>
@@ -40,6 +49,7 @@
           {% endfor %}
         </tbody>
       </table>
+      <a href="../../walks/create" class="btn">Add Walk</a>
     </div>
     <div class="col s6">
       <form action="{% url 'add_feeding' dog.id %}" method="POST">
