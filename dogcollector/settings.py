@@ -74,11 +74,23 @@ WSGI_APPLICATION = 'dogcollector.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'dogcollector',
+#     }
+# }
+
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dogcollector',
-    }
+  'default': {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': 'dogcollector',
+    'USER': 'taylorlottdixon',
+    'PASSWORD': 'vtMb5j8ZBgYL',
+    'HOST': 'ep-cool-salad-48454657.us-east-2.aws.neon.tech',
+    'PORT': '5432',
+  }
 }
 
 
